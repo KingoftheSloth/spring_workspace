@@ -1,0 +1,35 @@
+package org.iclass.di.setter;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+
+import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
+
+// 자동 주입을 확인하기 위한 main
+@Slf4j
+public class BuyApp2 {
+	public static void main(String[] args) {
+
+		// spring-context : bean 에 접근하기 위해 사용. bean 은 스프링 컨테이너에 어장
+		ApplicationContext context = new AnnotationConfigApplicationContext(BuyConfig2.class);
+
+		//ApplicationContext : ApplicationContext를 구성하는 설정파일을 어노테이션으로 한다. 
+
+		log.info("::: 스프링 컨테이너에 저장된 bean 의 이름확인 :::");
+		String[] beans = context.getBeanDefinitionNames();
+		for (String bean : beans) {
+			System.out.println(bean);
+		}
+		
+		//Bean 컨테이너 buy2Controller Bean 을 가져오기
+ log.debug("Buy2Controller 빈 가져와서 buy 메서드 실행하기 -------------------------------");
+		Buy2Controller buy2Controller = context.getBean(Buy2Controller.class);
+		log.info("인중냄새방구냄새 : {} ", buy2Controller);
+		buy2Controller.buy();
+		log.debug("-----------------------------------------------------------------");
+		
+	((AbstractApplicationContext)context).close();
+	}
+}

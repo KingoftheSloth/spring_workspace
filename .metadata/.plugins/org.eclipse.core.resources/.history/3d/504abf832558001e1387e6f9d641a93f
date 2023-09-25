@@ -1,0 +1,20 @@
+package org.iclass.di;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+// 자동 주입을 확인하기 위한 main
+public class BuyApp {
+public static void main(String[] args) {
+	
+	//spring-context : bean 에 접근하기 위해 사용. bean 은 스프링 컨테이너에 어장
+	ApplicationContext context
+	 = new AnnotationConfigApplicationContext(BuyConfig.class);
+	
+	System.out.println("::: 스프링 컨테이너에 저장된 bean의 이름 확인 :::");
+	String[] beans = context.getBeanDefinitionNames();
+	for(String bean : beans) {
+		System.out.println(bean);
+	}
+}
+}

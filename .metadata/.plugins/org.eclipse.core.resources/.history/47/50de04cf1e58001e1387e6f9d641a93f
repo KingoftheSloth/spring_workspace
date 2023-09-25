@@ -1,0 +1,7 @@
+### Spring Tool Suite 4 (IDE) 버전을 설치
+
+File - New 메뉴 에서 선택하는 프로젝트 유형
+1. Maven Project : 기존 프로젝트 생성방식과 동일 Maven 빌드환경으로 만드는 프로젝트
+2. Dynamic Web Project : 웹애플리케이션 프로젝트 (Maven 적용되지 않은 상태)
+3. Spring Starter Project :  스프링 부트 프로젝트 
+- spring 프레임워크가 적용되기 위해 필요한 과정(설정)을 자동으로 지원하는 기능을 포함

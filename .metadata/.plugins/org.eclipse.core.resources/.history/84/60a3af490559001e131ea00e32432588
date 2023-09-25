@@ -1,0 +1,15 @@
+package org.iclass.dao;
+
+import java.util.Map;
+
+import org.iclass.dto.TodoDto;
+
+public interface TodoMapper {
+	int insert (TodoDto vo);
+	TodoDto selectAll (TodoDto vo);
+	TodoDto selectOne (int tno);
+	long getCount ();
+	TodoDto selectPageList ();
+
+}
+

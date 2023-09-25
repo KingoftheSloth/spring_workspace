@@ -1,0 +1,23 @@
+package org.iclass.practice;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import lombok.Setter;
+
+@Component
+@Setter 
+public class ProductDao {
+	private int count;
+	
+
+public ProductDao(@Value("15") int count) {
+	System.out.println("나는 카운트다옹");
+	this.count = count;
+}
+public void product() {
+	System.out.println("프로덕트다오 메서드 ");
+	System.out.println("수량 : " + count + "생산이다뿅");
+}
+}

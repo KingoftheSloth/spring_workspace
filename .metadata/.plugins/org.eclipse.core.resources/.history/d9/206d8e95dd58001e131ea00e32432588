@@ -1,0 +1,24 @@
+package org.iclass.my;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
+@Component
+@Setter 
+//@RequiredArgsConstructor
+public class FinalProductDao {
+	private final int count;
+	
+	public FinalProductDao(@Value("20") int count) {
+		this.count = count;
+	}
+	public int product() {
+		System.out.println("---- ProductDao product() 메소드 ----");
+		System.out.println(" 내가 마지막 프로덕트 입니다. ");
+	return this.count;
+	}
+}

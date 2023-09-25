@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="org.iclass.dao.TodoMapper">
+<insert id="insert" parameterType="org.iclass.dto.TodoDto">
+	insert into
+	tbl_todo(tno,title,dueDate,writer)
+	values
+	(todoSeq.nextval, #{title},#{dueDate},#{writer})
+</insert> 
+<select id="selectAll" resultType="org.iclass.dto.TodoDto">
+	select * from tbl_todo order by tno desc
+</select>
+<select id="selectOne" resultType="org.iclass.dto.TodoDto" parameterType="long">
+	select * from tbl_todo where tno = #{tno}
+</select>
+<select id="getCount" resultType="long">
+	select count(*) from tbl_todo
+</select>
+<!--paging을 할 수 있는 List -->
+<select id="selectPageList" resultType="org.iclass.dto.TodoDto" parameterType="java.util.Map">
+select * 
+from 
+(select rownum r,f.* from 
+(select * from tbl_todo	
+order by tno desc) f)
+where r between #{start} and #{end}
+</select> 
+
+<!--페이징 and 검색을 위한 동적 쿼리 : selectPageList와 getCount에 사용할 쿼리 코드 조각 정의-->
+<sql id = "search">
+	<where>
+		<if test="types !=null and types.length >0">
+			<foreach collection="types" item="type" open="("close=")" separator=" OR">
+				
+				
+				
+				
+			</foreach>
+			
+		</if>
+		
+		
+	</where>
+</sql>	
+ </mapper>
+ 
+ 
+ 
+ 
+ 
+ 

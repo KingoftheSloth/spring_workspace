@@ -1,0 +1,65 @@
+package org.iclass.dao;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.stream.IntStream;
+
+import org.iclass.config.MybatisConfig;
+import org.iclass.dto.TodoDto;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import lombok.extern.slf4j.Slf4j;
+
+
+@DisplayName("TodoMapper 구현체 생성 확인하기")
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = MybatisConfig.class)
+@Slf4j
+class TodoMapperTest {
+	@Autowired
+	private TodoMapper dao;
+	
+	@Test
+	@DisplayName("insert를 여러행 해봅시다.")
+	void inisertMany() {
+		IntStream.range(1,20).forEach(i -> {
+		TodoDto dto = TodoDto.builder().dueDate(LocalDate.of(2023, 9, 22)).title("mybatis공부" + i)
+		//dueDate(LocalDate.of(2023, 10, 1))
+		.writer("momo" + (char)('A'+i)).finished(true).build();
+		
+		dao.insert(dto);}
+				);
+	}
+@Test
+@DisplayName("todo테이블에 insert가 되어야 합니다. ")
+@Disabled
+	void insert() {
+TodoDto vo = TodoDto.builder().dueDate(LocalDate.of(2023, 10, 1)).title("mybatis공부")
+//dueDate(LocalDate.of(2023, 10, 1))
+.writer("momo").build();
+log.info(">>>> dto : {}", vo);
+	dao.insert(vo);
+	assertNotEquals(0, dao.insert(vo));
+
+}
+
+@Test
+@DisplayName("tno 1개를 지정해서 조건값으로 조회가 되어야합니다.")
+@Disabled
+void selectOne() {
+long tno = 20111;
+	TodoDto dto = dao.selectOne(tno);
+	log.info(">>>>>> 조회된 dto: {}" ,dto);
+	assertNotNull(dto);
+}
+
+
+}

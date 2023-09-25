@@ -1,0 +1,81 @@
+package org.iclass.dao;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.IntStream;
+
+import org.iclass.config.MybatisConfig;
+import org.iclass.dto.PageRequestDTO;
+import org.iclass.dto.TodoDto;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import lombok.extern.slf4j.Slf4j;
+
+
+@DisplayName("TodoMapper 구현체 생성 확인하기")
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = MybatisConfig.class)
+@Slf4j
+class TodoMapperTest {
+	@Autowired
+	private TodoMapper dao;
+	
+	@Test
+	@DisplayName("insert를 여러행 해봅시다. 페이징 테스트를 위한 데이터 추가입니다.")
+	@Disabled
+	void inisertMany() {
+		IntStream.range(1,20).forEach(i -> { //i는 1부터 19까지 실행됩니다.
+ 		TodoDto dto = TodoDto.builder().dueDate(LocalDate.of(2023, 10, 3)).title("집에가고싶다." + i)
+		//dueDate(LocalDate.of(2023, 10, 1))
+		.writer("twice" + (char)('A'+i)).finished(true).build();
+		
+		dao.insert(dto);}
+				);
+	}
+	@Test
+	@DisplayName("다양한 조건으로 검색합니다.")
+	@Disabled
+	void search() {
+		// PageRequestDTO pageRequestDTO = PageRequestDTO.of(1,5,new String[] {"t","w"}, "매퍼", false, null,null);
+		PageRequestDTO pageRequestDTO = PageRequestDTO.of(1, 5, null, null, false, 
+			LocalDate.of(2023, 9, 29),LocalDate.of(2023, 10, 2));
+		
+		List<TodoDto> list = dao.selectPagelist(pageRequestDTO);
+	list.forEach(dto -> log.info(">>>>> search result : {}", dto));
+	
+	}
+	
+@Test
+@DisplayName("todo테이블에 insert가 되어야 합니다. ")
+
+	void insert() {
+TodoDto vo = TodoDto.builder().dueDate(LocalDate.of(2023, 10, 1)).title("mybatis공부")
+//dueDate(LocalDate.of(2023, 10, 1))
+.writer("momo").build();
+log.info(">>>> dto : {}", vo);
+	dao.insert(vo);
+	assertNotEquals(0, dao.insert(vo));
+
+}
+
+@Test
+@DisplayName("tno 1개를 지정해서 조건값으로 조회가 되어야합니다.")
+@Disabled
+void selectOne() {
+long tno = 20111;
+	TodoDto dto = dao.selectOne(tno);
+	log.info(">>>>>> 조회된 dto: {}" ,dto);
+	assertNotNull(dto);
+}
+
+
+}

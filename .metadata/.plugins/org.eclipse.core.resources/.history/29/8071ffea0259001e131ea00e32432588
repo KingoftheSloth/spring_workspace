@@ -1,0 +1,13 @@
+package org.iclass.dao;
+
+import org.iclass.dto.TodoDto;
+
+public interface TodoMapper {
+	int insert (TodoDto vo);
+	TodoDto selectAll (TodoDto vo);
+	int selectOne (int vo);
+	long getCount ();
+	int selectPageList (TodoDto vo);
+
+}
+

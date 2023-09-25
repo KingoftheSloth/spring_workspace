@@ -1,0 +1,46 @@
+package org.iclass.dto;
+
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+
+import org.springframework.cglib.core.Local;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Getter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class TodoDto {
+private long tno;
+private String title; // 제목 
+
+@DateTimeFormat(pattern ="yyyy-mm-dd")
+private LocalDate dueDate; // 할일 기한 날짜. mybatis에서 날짜타입을 Date 아닌
+//private Date dueDate; 	//				ㄴ LocalDate 적용되는지 확인필요.!!
+							//				ㄴ 스프링의 다른 기능 사용을 위해 날짜타입 LocalDate 로 함.
+private String writer; 				//작성
+private boolean finished;		 //완료여부
+
+}
+/*
+ * 
+ * Create table tbl_todo (
+ * tno number(6) PRIMARY KEY,
+ * title varcahr2(100) NOT NULL,
+ * dueDate DATE NOT NULL,
+ * writer varcahr2(50) NOT NULL,
+ * finished number(2) DEFAULT 0 
+ * );
+ * 
+ * 
+ *  SELECT * FROM TBL_TODO ;
+ * create SEQUENCE todoSeq START WITH 20111;
+ * */
