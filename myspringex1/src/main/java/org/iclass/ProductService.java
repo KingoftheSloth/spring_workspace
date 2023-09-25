@@ -1,4 +1,4 @@
-package org.iclass;
+`package org.iclass;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
