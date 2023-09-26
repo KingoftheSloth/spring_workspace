@@ -1,5 +1,6 @@
 package org.iclass.mvc.controller;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.time.LocalDate;
 
 import org.iclass.mvc.dto.Community;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,7 +45,7 @@ public void read(int idx,
 		@ModelAttribute("page") // 파라미터로 받은 값 Model 객체- model.addAttribute와 같이 저장합니다. 
 int page, Model model) {
 	model.addAttribute("vo", service.read(idx));
-	
+	model.addAttribute("cmtlist", service.commentsList(idx));
 }
 
 @GetMapping("/write")
@@ -51,10 +53,12 @@ public void write() {
 	// 글쓰기 GET 요청은 view name만 지정하고 끝.
 }
 @PostMapping("/write")
-public String save(Community dto) { //parameter가 많을 때, 그것들을 필드로 갖는 dto 또는 map으로 전달받기 
+public String save(Community dto
+		, RedirectAttributes reAttr
+		) { //parameter가 많을 때, 그것들을 필드로 갖는 dto 또는 map으로 전달받기 
 	log.info("dto: {}", dto);
 	service.insert(dto);
-	
+	reAttr.addFlashAttribute("message", "글 등록이 완료되었습니다.");
 	return "redirect:/community/list";
 }
 // location.href = 'list.jsp'는 자바스크립트 - 클라이언트 브라우저에서 주소를 변경 
@@ -64,6 +68,43 @@ public String save(Community dto) { //parameter가 많을 때, 그것들을 필�
 @PostMapping("/update")
 public void update(long idx, @ModelAttribute("page") int page, Model model) {
 	model.addAttribute("vo", service.selectByIdx(idx));
+	// int page 는 @ModelAttribute로 model.addAttribute("page",page); 를 대신해서 
+	// 				update.jsp로 전달합니다. 
 }
+
+@PostMapping("/save")
+public String updateAction(int page, Community dto, //Model model) {
+	RedirectAttributes redirectAttributes ) {
+	service.update(dto);
+	// return "redirect:/community/list?page="+page;
+	// 수정 후 다시 글 상세보기
+	redirectAttributes.addAttribute("idx", dto.getIdx());
+	redirectAttributes.addAttribute("page", page);
+	redirectAttributes.addFlashAttribute("message", "글 수정이 완료됐수정.");
+	return "redirect:/community/read";
+	}
+
+@PostMapping("/delete")
+public String delete(@ModelAttribute("page") int page, Long idx
+		, RedirectAttributes reAttr) {
+	service.delete(idx);
+	reAttr.addFlashAttribute("message", "삭제 캐리");
+	reAttr.addFlashAttribute("page" , page); 
+	//@ModelAttribute 와 RedirectAttributes  충돌하므로 직접 코딩함.
+	return "redirect:/community/list";
+}
+
+
+ @PostMapping("/comments") public String comments(int page, int f,
+ CommunityComments dto, RedirectAttributes redirectAttributes) {
+  
+  log.info(">>>>>>>>>>>>>>>> dto : {}" , dto); 
+  service.comments(dto,f);
+  redirectAttributes.addAttribute("page",page);
+  redirectAttributes.addAttribute("idx", dto.getMref());
+  
+  //return "redirect:/community/read?page="+page+"&idx="+dto.getMref(); return
+  return "redirect:/community/read"; // 리다이렉트 애트리뷰트 사용하므로 쿼리스트링 안씁니다. 
+  }
 }
 

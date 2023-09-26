@@ -18,4 +18,6 @@ public interface CommunityMapper {
 	int delete(long idx);
 	
 	int update(Community vo);
+	
+//	comments();
 }

@@ -45,7 +45,7 @@
  	<update id="update" parameterType="org.iclass.mvc.dto.Community">
 	 	UPDATE community
 		SET 
-			title=#{title}, content=#{content} ,ip=#{ip}
+			title=#{title}, content=#{content}, ip=#{ip}
 		WHERE 
 			idx=#{idx}
  	</update>

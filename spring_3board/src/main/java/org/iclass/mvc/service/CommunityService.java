@@ -4,10 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.iclass.mvc.dao.CommunityCommentsMapper;
 import org.iclass.mvc.dao.CommunityMapper;
 import org.iclass.mvc.dto.Community;
+import org.iclass.mvc.dto.CommunityComments;
 import org.iclass.mvc.dto.Paging;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +21,8 @@ public class CommunityService {
 	// Controller는 요청에 대한 view를 담당. 비지니스 로직은 service에서 처리하도록 합니다. 
 	//서비스는 특정(단위) 기능을 중심을 메소드를 정의. dao는 하나의 sql로 만들어지는 메소드.
 	private final CommunityMapper dao;
+	private final CommunityCommentsMapper cmtdao; // 
+	
 	
 	public Map<String,Object> pagelist(int page){
 		//만들어진 페이지리스트와 Paging 정보를 같이 리턴하기 위해 
@@ -69,7 +74,18 @@ public class CommunityService {
 		return dao.update(vo);
 	}
 
-
-
+	@Transactional // 트랜잭션 처리를 위한 -2개의 SQL 이 하나의 처리 단위 애노테이션
+	public void comments(CommunityComments dto, int f){
+if(f==1) {
+	cmtdao.insert(dto);
+	cmtdao.setCommentCount(dto.getMref()); // 댓글 개수 업데이트
+}else if(f==2) {
+	cmtdao.delete(dto.getIdx());
+	cmtdao.setCommentCount(dto.getMref()); // 댓글 개수 업데이트
+}
+}
+	public List<CommunityComments> commentsList(long idx){ // 댓글 목록
+		return cmtdao.commentsList(idx);
+	}
 
 }
