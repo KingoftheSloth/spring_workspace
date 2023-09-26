@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="communityComments">
- 	<insert id="insert" parameterType="org.iclass.dto.CommunityComments">
+ <mapper namespace="org.iclass.mvc.dao.CommunityCommentsMapper">
+ 	<insert id="insert" parameterType="org.iclass.mvc.dto.CommunityComments">
  		INSERT INTO communityComments
  			(idx,mref,writer,content) 
 		VALUES 
@@ -20,11 +20,13 @@
  	<select id="maxOf" resultType="int">
  		SELECT max(idx) FROM communityComments 
  	</select>
+ 	<!-- 댓글 목록  -->
  	
- 	<select id= "commentsList" parameterType ="Long" resultType="org.iclass.dto.CommunityComments">
+ 	<select id= "commentsList" parameterType ="Long" 
+ 	resultType="org.iclass.mvc.dto.CommunityComments">
  	SELECT *
  	FROM communityComments
- 	WHERE mref= #{mref}
+ 	WHERE mref= #{idx}
  	</select>
  	<!-- 메인글의 댓글 개수 컬럼을 update -->
  	<update id="setCommentCount" parameterType="Long">

@@ -24,5 +24,11 @@
 </c:if>
 	<p><a href="community/list">커뮤니티</a></p>
 </nav>
+<hr>
+<!--  -->
+<h3>mvc controller test</h3>
+<a href="sample/list">리스트 샘플</a>
+<a href="sample/write">글쓰기 샘플</a>
+<a href="sample/read">글읽기 샘플 </a>
 </body>
 </html>

@@ -46,6 +46,7 @@
 			<!-- 6. mybatis 매퍼 xml-->
 			<list> <!-- ArrayList 와 같은 컬렉션이 프로퍼티 값으로 참조됩니다. -->
 				<value>classpath:META-INF/mybatis/community.xml</value>
+				<value>classpath:META-INF/mybatis/communityComments.xml</value>
 				<!--<value></value>-->
 			</list>
 		</property>
@@ -55,7 +56,7 @@
 		<!-- 의존관계 생성자 주입 -->
 		<constructor-arg ref="sqlSessionFactoryBean"/>
 	</bean>
-	<!-- 8. mybatis-spring는 community.xml(매퍼파일)과 연결되는 인터페이스를 사용합니다.
+	<!-- 8. mybatis-spring는 community.xml(매퍼파일)과 연결되는 인터페이스를 사용합니다. @MapperScan 과 같은 기능
 			그 매퍼 인터페이스의 패키지를 알려줘야 합니다. 인터페이스 구현체는 프록시 클래스가 만듭니다.-->	
 	<mybatis-spring:scan base-package="org.iclass.mvc.dao"/>
 	

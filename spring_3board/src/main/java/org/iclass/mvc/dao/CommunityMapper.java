@@ -15,4 +15,7 @@ public interface CommunityMapper {
 	//글 쓰기
 	int insert(Community vo);
 	
+	int delete(long idx);
+	
+	int update(Community vo);
 }

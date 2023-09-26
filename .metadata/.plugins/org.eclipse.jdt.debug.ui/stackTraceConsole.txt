@@ -1,29 +1,29 @@
 org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.exceptions.PersistenceException: 
 ### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 
-### The error may exist in class path resource [META-INF/mybatis/community.xml]
-### The error may involve org.iclass.dao.CommunityMapper.list
+### The error may exist in class path resource [META-INF/mybatis/communityComments.xml]
+### The error may involve org.iclass.mvc.dao.CommunityCommentsMapper.commentsList
 ### The error occurred while executing a query
 ### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 
 	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:96)
 	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:441)
-	at jdk.proxy2/jdk.proxy2.$Proxy29.selectList(Unknown Source)
+	at jdk.proxy2/jdk.proxy2.$Proxy23.selectList(Unknown Source)
 	at org.mybatis.spring.SqlSessionTemplate.selectList(SqlSessionTemplate.java:224)
 	at org.apache.ibatis.binding.MapperMethod.executeForMany(MapperMethod.java:147)
 	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:80)
 	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:145)
 	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86)
-	at jdk.proxy2/jdk.proxy2.$Proxy31.list(Unknown Source)
-	at org.iclass.dao.CommunityMapperTest.list(CommunityMapperTest.java:49)
+	at jdk.proxy2/jdk.proxy2.$Proxy25.commentsList(Unknown Source)
+	at org.iclass.CommentsMapperTest.cmtlist(CommentsMapperTest.java:28)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 Caused by: org.apache.ibatis.exceptions.PersistenceException: 
 ### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 
-### The error may exist in class path resource [META-INF/mybatis/community.xml]
-### The error may involve org.iclass.dao.CommunityMapper.list
+### The error may exist in class path resource [META-INF/mybatis/communityComments.xml]
+### The error may involve org.iclass.mvc.dao.CommunityCommentsMapper.commentsList
 ### The error occurred while executing a query
 ### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 
@@ -53,20 +53,24 @@ Caused by: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to 
 	... 18 more
 Caused by: java.sql.SQLException: ORA-01017: invalid username/password; logon denied
 
-	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:447)
-	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:389)
-	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:382)
-	at oracle.jdbc.driver.T4CTTIfun.processError(T4CTTIfun.java:675)
-	at oracle.jdbc.driver.T4CTTIoauthenticate.processError(T4CTTIoauthenticate.java:448)
-	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:513)
-	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:227)
-	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:383)
-	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:776)
-	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:432)
-	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:553)
-	at oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:254)
-	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:32)
-	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:528)
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:630)
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:559)
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:554)
+	at oracle.jdbc.driver.T4CTTIfun.processError(T4CTTIfun.java:1377)
+	at oracle.jdbc.driver.T4CTTIoauthenticate.processError(T4CTTIoauthenticate.java:782)
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:772)
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:299)
+	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:450)
+	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTHWithO5Logon(T4CTTIoauthenticate.java:1553)
+	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1302)
+	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:1256)
+	at oracle.jdbc.driver.T4CConnection.authenticateWithPassword(T4CConnection.java:1445)
+	at oracle.jdbc.driver.T4CConnection.authenticateUserForLogon(T4CConnection.java:1394)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:677)
+	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:1089)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:90)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:733)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:649)
 	at org.springframework.jdbc.datasource.SimpleDriverDataSource.getConnectionFromDriver(SimpleDriverDataSource.java:144)
 	at org.springframework.jdbc.datasource.AbstractDriverBasedDataSource.getConnectionFromDriver(AbstractDriverBasedDataSource.java:205)
 	at org.springframework.jdbc.datasource.AbstractDriverBasedDataSource.getConnection(AbstractDriverBasedDataSource.java:169)

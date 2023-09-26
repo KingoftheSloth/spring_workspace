@@ -19,6 +19,7 @@
 						<!--onsubmit="return isValid()" 방법도 있음.  -->
 	<input type="hidden" name="idx" value="${vo.idx }">
 	<input type="hidden" name="page" value="${page}">    
+	<input type="hidden" name="ip" value="${pageContext.request.remoteAddr}">    
 	<!-- 현재페이지 번호 전달 - 순서5) post 로 전달해야 하므로 hidden type으로 저장 -->
  <table>
  	<tr><th>제목</th>

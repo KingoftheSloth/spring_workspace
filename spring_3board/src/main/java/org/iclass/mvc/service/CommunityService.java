@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class CommunityService {
+	// Controller는 요청에 대한 view를 담당. 비지니스 로직은 service에서 처리하도록 합니다. 
 	//서비스는 특정(단위) 기능을 중심을 메소드를 정의. dao는 하나의 sql로 만들어지는 메소드.
 	private final CommunityMapper dao;
 	
@@ -58,13 +59,16 @@ public class CommunityService {
 		return dao.insert(vo);
 	}
 
-	/*
+	
 	public int delete(long idx) {	//Integer, Long : 래퍼(wrapper) 클래스
+		return dao.delete(idx);
+	
 	}
 
 	public int update(Community vo) {
+		return dao.update(vo);
 	}
-*/
+
 
 
 
